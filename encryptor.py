@@ -5,7 +5,10 @@ def start():
     print("Vítej v jednoduchém šifrovacím programu. Pomocí tohoto programu můžeš šifrovat i dešifrovat soubory, avšak pamatuj, že jej užíváš na vlastní riziko!")
     print("----------------------------------------------------------------------------------------------------------------------------------------------------")
     print("Nyní si vyber, jakou úlohu chceš, aby program vykonal. Před šifrováním si však budeš muset vytvořit šifrovací klíč, před dešifrováním zase bude potřeba, aby takový klíč existoval.")
-    print("[1] - Vytvořit klíč [2] - Zašifrovat soubor [3] - Dešifrovat soubor")
+    choices()
+                  
+def choices():
+    print("[1] - Vytvořit klíč [2] - Zašifrovat soubor [3] - Dešifrovat soubor [4] Ukončit program")
     choice = input()
     match choice:
         case "1":
@@ -14,10 +17,12 @@ def start():
             encrypt()
         case "3":
             decrypt()
-        case _:
-            print("Špatná volba, ukončuji program...")
+        case "4":
             quit()
-          
+        case _:
+            print("Zadej platnou volbu.");
+            choices()
+                  
 def generatekey():
     key = Fernet.generate_key()
     print("Zadej název souboru: ")
@@ -29,20 +34,7 @@ def generatekey():
     print("Soubor s klíčem byl vytvořen, nezapomeňte si jej zálohovat, abyste mohli získat přístup k souboru. Klíč: ")
     print(key)
     print("Přeješ si dále pokračovat? Vyber možnost.")
-    print("[1] - Šifrovat soubor s užitím klíče [2] - Dešifrovat soubor [3] - Vytvořit nový klíč [4] - Ukončit aplikaci ")
-    choice = input()
-    match choice:
-        case "1":
-            encrypt()
-        case "2":
-            decrypt()
-        case "3":
-            generatekey()
-        case "4":
-            quit()
-        case _:
-            print("Špatná volba, ukončuji program...")
-            quit()
+    choices()
 
 def encrypt():
     print("Zadej cestu ke klíči (stačí [název].key nebo úplná cesta): ")
@@ -66,29 +58,16 @@ def encrypt():
                     encrypted_file.write(encrypted);
                 print("Soubor úspěšně zašifrován.")
                 print("Přeješ si pokračovat?")
-                print("[1] - Vytvořit nový klíč [2] - Šifrovat jiný soubor [3] - Dešifrovat soubor [4] - Ukončit aplikaci")
-                choice = input()
-                match choice:
-                    case "1":
-                        generatekey()
-                    case "2":
-                        encrypt()
-                    case "3":
-                        decrypt()
-                    case "4":
-                        quit()
-                    case _:
-                        print("Neplatná volba. Ukončuji aplikaci...")
-                        quit()
+                choices()
             else:
                 print("Neplatný soubor k zašifrování.")
-                quit()
+                encrypt()
         else:
             print("Vyybrán neplatný soubor s klíčem. Ukončuji program...")
-            quit()
+            encrypt()
     else:
         print("Zadaná cesta neodkazuje na klíč. Ukončuji program...")
-        quit()
+        encrypt()
 
 def decrypt():
     print("Zadej cestu ke klíči (stačí [název].key nebo úplná cesta): ")
@@ -111,26 +90,14 @@ def decrypt():
                 with open(file, 'wb') as dec_file:
                     dec_file.write(decrypted)
                 print("Soubor úspěšně dešifrován. Přejete si pokračovat?")
-                print("[1] - Vytvořit nový klíč [2] - Šifrovat nový soubor [3] - Dešifrovat jiný soubor [4] - Ukončit aplikaci")
-                choice = input()
-                match choice:
-                    case "1":
-                        generatekey()
-                    case "2":
-                        encrypt()
-                    case "3":
-                        decrypt()
-                    case "4":
-                        quit()
-                    case _:
-                        print("Neplatná volba. Ukončuji program...")
+                choices()
             else:
                 print("Neplatná cesta k souboru, ukončuji program...")
-                quit()
+                decrypt()
         else:
             print("Neplatný soubor s klíčem, ukončuji program...")
-            quit()
+            decrypt()
     else:
         print("Zadaná cesta neodkazuje na klíč. Ukončuji aplikaci...")
-        quit()
+        decrypt()
 start()
