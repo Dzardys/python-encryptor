@@ -63,10 +63,10 @@ def encrypt():
                 print("Neplatný soubor k zašifrování.")
                 encrypt()
         else:
-            print("Vyybrán neplatný soubor s klíčem. Ukončuji program...")
+            print("Vyybrán neplatný soubor s klíčem, zkusíme to znovu...")
             encrypt()
     else:
-        print("Zadaná cesta neodkazuje na klíč. Ukončuji program...")
+        print("Zadaná cesta neodkazuje na klíč, zkusíme to znovu...")
         encrypt()
 
 def decrypt():
@@ -92,12 +92,12 @@ def decrypt():
                 print("Soubor úspěšně dešifrován. Přejete si pokračovat?")
                 choices()
             else:
-                print("Neplatná cesta k souboru, ukončuji program...")
+                print("Neplatná cesta k souboru, zkusíme to znovu...")
                 decrypt()
         else:
-            print("Neplatný soubor s klíčem, ukončuji program...")
+            print("Neplatný soubor s klíčem, zkusíme to znovu...")
             decrypt()
     else:
-        print("Zadaná cesta neodkazuje na klíč. Ukončuji aplikaci...")
+        print("Zadaná cesta neodkazuje na klíč, zkusíme to znovu...")
         decrypt()
 start()
